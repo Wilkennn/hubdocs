@@ -1,0 +1,188 @@
+@import "tailwindcss";
+
+/* Importar fonte */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Tema customizado do HubDocs */
+@theme {
+  --color-primary: rgb(92, 192, 46);
+  --color-primary-50: #f0fdf4;
+  --color-primary-100: #dcfce7;
+  --color-primary-200: #bbf7d0;
+  --color-primary-300: #86efac;
+  --color-primary-400: #5cc02e;
+  --color-primary-500: rgb(92, 192, 46);
+  --color-primary-600: #16a34a;
+  --color-primary-700: #15803d;
+  --color-primary-800: #166534;
+  --color-primary-900: #14532d;
+  
+  --font-family-sans: Inter, system-ui, sans-serif;
+  --font-family-contract: 'Times New Roman', serif;
+}
+
+/* Classes utilitárias customizadas */
+.btn-primary {
+  background-color: var(--color-primary);
+  color: white;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.2s;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-600);
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background-color: white;
+  color: #374151;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid #d1d5db;
+  transition: background-color 0.2s;
+}
+
+.btn-secondary:hover {
+  background-color: #f9fafb;
+}
+
+.input-default {
+  display: block;
+  width: 100%;
+  border-radius: 0.5rem;
+  border: 1px solid #d1d5db;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  font-size: 0.875rem;
+}
+
+.input-default:focus {
+  border-color: var(--color-primary);
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 3px rgba(92, 192, 46, 0.1);
+}
+
+.card {
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  border: 1px solid #e5e7eb;
+  padding: 1.5rem;
+}
+
+/* Adicione ao final do arquivo */
+
+/* Estilos do Editor TipTap */
+.ProseMirror {
+  outline: none;
+}
+
+.ProseMirror p {
+  margin: 0.5rem 0;
+}
+
+.ProseMirror h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 1.5rem 0 1rem;
+  text-align: center;
+}
+
+.ProseMirror h3 {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin: 1.25rem 0 0.75rem;
+}
+
+.ProseMirror ul,
+.ProseMirror ol {
+  padding-left: 2rem;
+  margin: 0.5rem 0;
+}
+
+.ProseMirror table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.ProseMirror table td,
+.ProseMirror table th {
+  border: 1px solid #ddd;
+  padding: 0.5rem;
+}
+
+.ProseMirror table th {
+  background-color: #f3f4f6;
+  font-weight: 600;
+}
+
+.ProseMirror p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  color: #adb5bd;
+  pointer-events: none;
+  height: 0;
+}
+
+.prose hr {
+  position: relative;
+  border: 1px dashed #adb5bd; /* Linha tracejada cinza */
+  margin: 2rem 0;
+}
+
+/* * Adiciona o texto "Quebra de Página" no meio da linha 
+ * para o usuário saber o que é.
+ */
+.prose hr::after {
+  content: 'Quebra de Página';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: -0.75rem; /* Posição do texto */
+  background: #ffffff; /* Fundo branco (do editor) para "cortar" a linha */
+  padding: 0 0.5rem;
+  color: #adb5bd; /* Cor do texto cinza */
+  font-size: 0.75rem;
+  font-family: sans-serif;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+
+/* ======================================================================== */
+/* ESTILIZAÇÃO DA QUEBRA DE PÁGINA NO PDF (O que o exportador vê)
+/* ======================================================================== */
+
+/* * Isso só é ativado ao imprimir ou gerar PDF.
+ */
+@media print {
+  
+  /* * 1. Esconde o marcador (a linha e o texto) no PDF final.
+   * 2. FORÇA uma quebra de página *depois* do elemento.
+   */
+  .prose hr {
+    visibility: hidden; /* Esconde a linha e o pseudo-elemento ::after */
+    page-break-after: always; /* A MÁGICA ACONTECE AQUI */
+    margin: 0;
+    border: 0;
+    height: 0;
+  }
+  
+  /* * Evita quebras de página ruins (ex: um título sozinho no final da pág)
+   */
+  .prose h1, .prose h2, .prose h3 {
+    page-break-after: avoid;
+  }
+  .prose table, .prose blockquote {
+    page-break-inside: avoid;
+  }
+}
