@@ -1,7 +1,14 @@
+export interface User {
+  id: string;
+  email: string;
+  name: string;
+  role: 'admin' | 'legal' | 'sales';
+}
+
 export interface LoginCredentials {
   email: string;
   password: string;
-  rememberMe: boolean;
+  rememberMe?: boolean;
 }
 
 export interface RegisterData {
@@ -11,26 +18,15 @@ export interface RegisterData {
   role: 'admin' | 'legal' | 'sales';
 }
 
-export interface AuthUser {
-  id: string;
-  email: string;
-  name: string;
-  role: 'admin' | 'legal' | 'sales';
-}
-
 export interface AuthResponse {
-  user: AuthUser;
+  user: User;
   access_token: string;
 }
 
 export interface AuthContextType {
-  user: AuthUser | null;
-  /** True apenas durante a verificação inicial do token */
+  user: User | null;
+  isAuthenticated: boolean;
   loading: boolean;
-  /** A função de login, agora alinhada com a LoginPage */
   login: (email: string, password: string, rememberMe?: boolean) => Promise<void>;
   logout: () => Promise<void>;
-  /** Derivado do estado 'user'. True se o usuário estiver logado. */
-  isAuthenticated: boolean;
 }
-

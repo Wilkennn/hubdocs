@@ -1,13 +1,13 @@
 // src/pages/DocumentEditPage.tsx
 
 import React, { useState, useEffect, useCallback } from 'react';
-import { ContractEditor } from '../components/ContractEditor';
 import { 
   type DocumentData, 
   type Clause, 
   type Version 
-} from '../types/contract.types';
+} from '@/types';
 import { Loader2 } from 'lucide-react'; // Ícone de carregamento
+import { ContractEditor } from '@/features/contracts/components';
 
 // --- (INÍCIO) Dados Mockados (Simulados) ---
 

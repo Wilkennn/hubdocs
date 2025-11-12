@@ -78,15 +78,26 @@
   padding: 1.5rem;
 }
 
-/* Adicione ao final do arquivo */
+/* =========================================
+   ESTILOS DO EDITOR TIPTAP
+   ========================================= */
 
-/* Estilos do Editor TipTap */
 .ProseMirror {
   outline: none;
+  font-family: var(--font-family-sans);
 }
 
 .ProseMirror p {
   margin: 0.5rem 0;
+  line-height: 1.6;
+}
+
+.ProseMirror h1 {
+  font-size: 1.875rem;
+  font-weight: bold;
+  margin: 2rem 0 1rem;
+  text-align: center;
+  color: #1f2937;
 }
 
 .ProseMirror h2 {
@@ -94,95 +105,313 @@
   font-weight: bold;
   margin: 1.5rem 0 1rem;
   text-align: center;
+  color: #1f2937;
 }
 
 .ProseMirror h3 {
   font-size: 1.25rem;
-  font-weight: bold;
+  font-weight: 600;
   margin: 1.25rem 0 0.75rem;
+  color: #374151;
+}
+
+.ProseMirror h4 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin: 1rem 0 0.5rem;
+  color: #374151;
 }
 
 .ProseMirror ul,
 .ProseMirror ol {
   padding-left: 2rem;
-  margin: 0.5rem 0;
+  margin: 0.75rem 0;
+}
+
+.ProseMirror ul {
+  list-style-type: disc;
+}
+
+.ProseMirror ol {
+  list-style-type: decimal;
+}
+
+.ProseMirror li {
+  margin: 0.25rem 0;
+}
+
+.ProseMirror blockquote {
+  border-left: 4px solid #e5e7eb;
+  padding-left: 1rem;
+  margin: 1rem 0;
+  font-style: italic;
+  color: #6b7280;
 }
 
 .ProseMirror table {
   border-collapse: collapse;
   width: 100%;
   margin: 1rem 0;
+  font-size: 0.875rem;
 }
 
 .ProseMirror table td,
 .ProseMirror table th {
-  border: 1px solid #ddd;
-  padding: 0.5rem;
+  border: 1px solid #d1d5db;
+  padding: 0.75rem;
+  text-align: left;
 }
 
 .ProseMirror table th {
+  background-color: #f9fafb;
+  font-weight: 600;
+  color: #374151;
+}
+
+.ProseMirror table tr:nth-child(even) {
+  background-color: #f9fafb;
+}
+
+.ProseMirror code {
   background-color: #f3f4f6;
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.25rem;
+  font-family: 'Courier New', monospace;
+  font-size: 0.875rem;
+  color: #dc2626;
+}
+
+.ProseMirror pre {
+  background-color: #1f2937;
+  color: #f9fafb;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  margin: 1rem 0;
+}
+
+.ProseMirror pre code {
+  background-color: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+.ProseMirror strong {
   font-weight: 600;
 }
 
+.ProseMirror em {
+  font-style: italic;
+}
+
+.ProseMirror a {
+  color: var(--color-primary);
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+
+.ProseMirror a:hover {
+  color: var(--color-primary-600);
+}
+
+/* Placeholder do editor */
 .ProseMirror p.is-editor-empty:first-child::before {
   content: attr(data-placeholder);
   float: left;
-  color: #adb5bd;
+  color: #9ca3af;
   pointer-events: none;
   height: 0;
+  font-style: italic;
 }
+
+/* =========================================
+   ESTILOS DA QUEBRA DE PÁGINA - VISUALIZAÇÃO
+   ========================================= */
 
 .prose hr {
   position: relative;
-  border: 1px dashed #adb5bd; /* Linha tracejada cinza */
+  border: 1px dashed #d1d5db;
   margin: 2rem 0;
+  border-width: 2px;
 }
 
-/* * Adiciona o texto "Quebra de Página" no meio da linha 
- * para o usuário saber o que é.
- */
+/* Texto "Quebra de Página" no meio da linha */
 .prose hr::after {
   content: 'Quebra de Página';
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  top: -0.75rem; /* Posição do texto */
-  background: #ffffff; /* Fundo branco (do editor) para "cortar" a linha */
-  padding: 0 0.5rem;
-  color: #adb5bd; /* Cor do texto cinza */
+  top: -0.75rem;
+  background: #ffffff;
+  padding: 0 0.75rem;
+  color: #6b7280;
   font-size: 0.75rem;
-  font-family: sans-serif;
+  font-family: var(--font-family-sans);
   font-weight: 500;
   text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* =========================================
+   UTILITÁRIOS E LAYOUT
+   ========================================= */
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .text-shadow {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
 }
 
 
-/* ======================================================================== */
-/* ESTILIZAÇÃO DA QUEBRA DE PÁGINA NO PDF (O que o exportador vê)
-/* ======================================================================== */
+/* =========================================
+   LAYOUT DO EDITOR (Estilo Web / Notion)
+   ========================================= */
 
-/* * Isso só é ativado ao imprimir ou gerar PDF.
- */
+.editor-layout {
+  background-color: #ffffff; /* Fundo branco limpo */
+  min-height: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.ProseMirror {
+  /* === FLUIDEZ E LEITURA === */
+  width: 100%;
+  max-width: 800px; /* Largura máxima para leitura confortável (aprox 80 chars) */
+  min-height: 300px; /* Altura inicial mínima */
+  
+  /* === REMOVE VISUAL DE PAPEL === */
+  background: transparent;
+  box-shadow: none;
+  border: none;
+  margin: 0 auto;
+  
+  /* === ESPAÇAMENTO === */
+  padding: 0; /* Sem padding interno forçado, usa o do layout */
+  
+  /* === TIPOGRAFIA === */
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #1f2937;
+  font-size: 1.05rem; /* Um pouco maior para leitura em tela */
+  line-height: 1.75;
+  outline: none;
+}
+
+/* Ajuste de cabeçalhos para o modo "texto corrido" */
+.ProseMirror h1 {
+  font-size: 2.25rem;
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+}
+
+.ProseMirror h2 {
+  font-size: 1.75rem;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+/* =========================================
+   QUEBRA DE PÁGINA (Ainda útil para Impressão)
+   ========================================= */
+
+/* Na tela: Apenas uma linha divisória sutil */
+.page-break {
+  margin: 3rem 0;
+  border: 0;
+  border-top: 1px solid #e5e7eb; /* Linha cinza fina */
+  height: 0;
+  display: block;
+}
+
+/* Opcional: Pequeno aviso de que ali quebrará a página na impressão */
+.page-break::after {
+  content: 'Quebra de Página (Impressão)';
+  display: block;
+  text-align: center;
+  font-size: 0.75rem;
+  color: #9ca3af;
+  background: #fff;
+  width: max-content;
+  margin: -0.7rem auto 0; /* Sobe para ficar em cima da linha */
+  padding: 0 1rem;
+}
+
+/* =========================================
+   MODO DE IMPRESSÃO (PDF)
+   ========================================= */
+
+/* =========================================
+   ESTILOS DE IMPRESSÃO (ABNT)
+   ========================================= */
+
 @media print {
-  
-  /* * 1. Esconde o marcador (a linha e o texto) no PDF final.
-   * 2. FORÇA uma quebra de página *depois* do elemento.
-   */
-  .prose hr {
-    visibility: hidden; /* Esconde a linha e o pseudo-elemento ::after */
-    page-break-after: always; /* A MÁGICA ACONTECE AQUI */
-    margin: 0;
-    border: 0;
-    height: 0;
+  /* 1. Configuração da Folha e Margens ABNT */
+  @page {
+    size: A4;
+    /* Ordem: Topo | Direita | Fundo | Esquerda */
+    margin: 3cm 2cm 2cm 3cm; 
   }
-  
-  /* * Evita quebras de página ruins (ex: um título sozinho no final da pág)
-   */
-  .prose h1, .prose h2, .prose h3 {
-    page-break-after: avoid;
+
+  /* 2. Reset do Layout para impressão */
+  body, 
+  .editor-layout, 
+  #editor-scroll-container {
+    background-color: white !important;
+    height: auto !important;
+    width: auto !important;
+    overflow: visible !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: block !important;
   }
-  .prose table, .prose blockquote {
-    page-break-inside: avoid;
+
+  /* 3. Formatação do Texto (ABNT) */
+  .ProseMirror {
+    /* Garante que o editor ocupe a área útil da página (descontando as margens do @page) */
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important; /* O padding já é a margem do @page */
+    box-shadow: none !important;
+    border: none !important;
+
+    /* Tipografia Padrão de Contrato */
+    font-family: 'Times New Roman', Times, serif !important;
+    font-size: 12pt !important;
+    line-height: 1.5 !important; /* Espaçamento entre linhas 1.5 */
+    text-align: justify !important; /* Texto justificado */
+    color: black !important;
+  }
+
+  /* 4. Parágrafos */
+  .ProseMirror p {
+    margin-bottom: 0 !important; /* Remove margem extra se usar line-height */
+    text-indent: 1.25cm; /* Recuo da primeira linha do parágrafo (opcional, mas comum) */
+  }
+
+  /* 5. Títulos */
+  .ProseMirror h1, 
+  .ProseMirror h2, 
+  .ProseMirror h3 {
+    text-align: center !important; /* Títulos centralizados */
+    font-weight: bold !important;
+    margin-top: 1.5cm !important;
+    margin-bottom: 1cm !important;
+    page-break-after: avoid; /* Evita que o título fique sozinho no fim da página */
+  }
+
+  /* 6. Esconde elementos de UI se vazarem */
+  .no-print {
+    display: none !important;
   }
 }

@@ -71,3 +71,200 @@ export default defineConfig([
   },
 ])
 ```
+
+```
+hubdocs-frontend
+├─ .env
+├─ .env.example
+├─ eslint.config.js
+├─ index.html
+├─ package-lock.json
+├─ package.json
+├─ postcss.config.js
+├─ public
+│  └─ vite.svg
+├─ README.md
+├─ src
+│  ├─ api
+│  │  └─ api.ts
+│  ├─ App.tsx
+│  ├─ assets
+│  ├─ components
+│  │  ├─ ContractEditor
+│  │  │  ├─ EditorFooter.tsx
+│  │  │  ├─ EditorHeader.tsx
+│  │  │  ├─ EditorToolbar.tsx
+│  │  │  ├─ index.tsx
+│  │  │  ├─ panels
+│  │  │  │  ├─ ClausesPanel.tsx
+│  │  │  │  ├─ HistoryPanel.tsx
+│  │  │  │  ├─ panel.tsx
+│  │  │  │  └─ VariablesPanel.tsx
+│  │  │  ├─ SettingsSidebar.tsx
+│  │  │  └─ ToolbarButton.tsx
+│  │  ├─ layout
+│  │  │  ├─ Header.tsx
+│  │  │  └─ MainLayout.tsx
+│  │  ├─ ProtectedRoute.tsx
+│  │  └─ ui
+│  │     ├─ Badge.tsx
+│  │     ├─ Button.tsx
+│  │     ├─ Card.tsx
+│  │     ├─ Input.tsx
+│  │     ├─ LoadingSpinner.tsx
+│  │     ├─ Modal.tsx
+│  │     └─ SearchInput.tsx
+│  ├─ features
+│  │  ├─ auth
+│  │  │  ├─ AuthContext.tsx
+│  │  │  └─ authService.ts
+│  │  ├─ clauses
+│  │  ├─ contracts
+│  │  │  ├─ components
+│  │  │  │  ├─ ContractCard.tsx
+│  │  │  │  ├─ CreateContractModal.tsx
+│  │  │  │  └─ RenderStatusBadge.tsx
+│  │  │  └─ services
+│  │  │     └─ contractService.ts
+│  │  ├─ documents
+│  │  │  ├─ components
+│  │  │  └─ services
+│  │  │     └─ documentService.tsx
+│  │  └─ template
+│  │     └─ templateService.ts
+│  ├─ hooks
+│  │  ├─ useAttachClause.ts
+│  │  ├─ useContractClauses.ts
+│  │  ├─ useContracts.ts
+│  │  ├─ useCreateContract.ts
+│  │  ├─ useDocument.ts
+│  │  ├─ useDocumentVersions.ts
+│  │  ├─ useSaveDocument.ts
+│  │  └─ useTiptapEditor.ts
+│  ├─ index.css
+│  ├─ lib
+│  │  ├─ api.ts
+│  │  ├─ queryClient.ts
+│  │  └─ utils.ts
+│  ├─ main.tsx
+│  ├─ mocks
+│  ├─ pages
+│  │  ├─ ClausesPage.tsx
+│  │  ├─ ContractEditorPage.tsx
+│  │  ├─ ContractsListPage.tsx
+│  │  ├─ DocumentEditPage.tsx
+│  │  ├─ LoginPage.tsx
+│  │  └─ TemplatesPage.tsx
+│  └─ types
+│     ├─ auth.types.ts
+│     ├─ contract.types.ts
+│     ├─ document.types.ts
+│     └─ index.ts
+├─ tsconfig.app.json
+├─ tsconfig.json
+├─ tsconfig.node.json
+└─ vite.config.ts
+
+```
+```
+hubdocs-frontend
+├─ .env
+├─ .env.example
+├─ eslint.config.js
+├─ index.html
+├─ package-lock.json
+├─ package.json
+├─ postcss.config.js
+├─ public
+│  └─ vite.svg
+├─ README.md
+├─ src
+│  ├─ api
+│  │  └─ api.ts
+│  ├─ App.tsx
+│  ├─ assets
+│  ├─ components
+│  │  ├─ layout
+│  │  │  ├─ Header.tsx
+│  │  │  └─ MainLayout.tsx
+│  │  ├─ ProtectedRoute.tsx
+│  │  └─ ui
+│  │     ├─ BackButton.tsx
+│  │     ├─ Badge.tsx
+│  │     ├─ Button.tsx
+│  │     ├─ Card.tsx
+│  │     ├─ Input.tsx
+│  │     ├─ LoadingSpinner.tsx
+│  │     ├─ Modal.tsx
+│  │     └─ SearchInput.tsx
+│  ├─ features
+│  │  ├─ auth
+│  │  │  ├─ AuthContext.tsx
+│  │  │  └─ authService.ts
+│  │  ├─ clauses
+│  │  ├─ contracts
+│  │  │  ├─ components
+│  │  │  │  ├─ ContractCard.tsx
+│  │  │  │  ├─ CreateContractModal.tsx
+│  │  │  │  ├─ EditorFooter.tsx
+│  │  │  │  ├─ EditorHeader.tsx
+│  │  │  │  ├─ EditorTabBar.tsx
+│  │  │  │  ├─ EditorToolbar.tsx
+│  │  │  │  ├─ index.tsx
+│  │  │  │  ├─ PageBreakComponent.tsx
+│  │  │  │  ├─ panels
+│  │  │  │  │  ├─ ClausesPanel.tsx
+│  │  │  │  │  ├─ HistoryPanel.tsx
+│  │  │  │  │  ├─ panel.tsx
+│  │  │  │  │  └─ VariablesPanel.tsx
+│  │  │  │  ├─ RenderStatusBadge.tsx
+│  │  │  │  ├─ SettingsSidebar.tsx
+│  │  │  │  └─ ToolbarButton.tsx
+│  │  │  ├─ extensions
+│  │  │  │  ├─ AutoPaginationExtension.ts
+│  │  │  │  ├─ PageBreakExtension.tsx
+│  │  │  │  ├─ PaginationExtension.ts
+│  │  │  │  ├─ ResizableImageComponent.tsx
+│  │  │  │  └─ ResizableImageExtension.tsx
+│  │  │  └─ services
+│  │  │     └─ contractService.ts
+│  │  ├─ documents
+│  │  │  ├─ components
+│  │  │  └─ services
+│  │  │     └─ documentService.tsx
+│  │  └─ template
+│  │     └─ templateService.ts
+│  ├─ hooks
+│  │  ├─ useAttachClause.ts
+│  │  ├─ useContractClauses.ts
+│  │  ├─ useContracts.ts
+│  │  ├─ useCreateContract.ts
+│  │  ├─ useDocument.ts
+│  │  ├─ useDocumentVersions.ts
+│  │  ├─ useSaveDocument.ts
+│  │  └─ useTiptapEditor.ts
+│  ├─ index.css
+│  ├─ lib
+│  │  ├─ api.ts
+│  │  ├─ queryClient.ts
+│  │  └─ utils.ts
+│  ├─ main.tsx
+│  ├─ mocks
+│  ├─ pages
+│  │  ├─ ClausesPage.tsx
+│  │  ├─ ContractEditorPage.tsx
+│  │  ├─ ContractsListPage.tsx
+│  │  ├─ DocumentEditPage.tsx
+│  │  ├─ LoginPage.tsx
+│  │  └─ TemplatesPage.tsx
+│  └─ types
+│     ├─ auth.types.ts
+│     ├─ contract.types.ts
+│     ├─ document.types.ts
+│     └─ index.ts
+├─ tsconfig.app.json
+├─ tsconfig.json
+├─ tsconfig.node.json
+└─ vite.config.ts
+
+```

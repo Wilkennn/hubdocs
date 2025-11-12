@@ -2,8 +2,8 @@
 import React, { useState } from 'react';
 import { Editor } from '@tiptap/react';
 import { Plus, X } from 'lucide-react';
-import { Input } from '../../ui/Input';
-import { Button } from '../../ui/Button';
+import { Input } from '@/components/ui/Input';
+import { Button } from '@/components/ui/Button';
 
 type VariablesPanelProps = {
   editor: Editor;

@@ -1,28 +1,78 @@
 /**
- * Representa um item no histórico de versões,
- * conforme retornado pelo endpoint GET /documents/:id/versions.
- * (Note a ausência de 'htmlContent' para maior eficiência).
+ * Representa uma versão histórica de um documento.
  */
-export type DocumentVersionHistoryItem = {
-  id: string;
-  timestamp: string; // O JSON serializa datas como strings
-  documentId: string;
-  versionId: number; // O campo numérico que implementamos
-  // userId?: string; // Se você o adicionou ao 'select'
-};
-
-// src/types/document.types.ts
+export interface Version {
+  versionId: string;
+  timestamp: string;
+  htmlContent: string;
+}
 
 /**
- * Representa um documento (principal ou anexo) 
- * retornado como parte de um contrato.
+ * Representa um item no histórico de versões (sem o conteúdo completo).
  */
-export interface Document {
+export interface DocumentVersionHistoryItem {
+  id: string;
+  timestamp: string;
+  documentId: string;
+  versionId: number;
+  userId?: string;
+}
+
+/**
+ * Representa um documento editável (Principal ou Anexo).
+ */
+export interface DocumentData {
   id: string;
   name: string;
+  htmlContent: string;
+  versions: Version[];
   isAnnex: boolean;
   originalClauseId?: number; // Se for um anexo de uma cláusula
-  createdAt: string;
-  // O htmlContent completo pode ou não vir aqui, dependendo da API
-  // Se for muito pesado, a API 'GET /contracts/:id' pode omiti-lo.
+  createdAt?: string;
 }
+
+/**
+ * Representa um Termo ou Cláusula pré-definida.
+ */
+export interface Clause {
+  id: string;
+  title: string;
+  content: string;
+}
+
+/**
+ * Variáveis do documento (ex: {{nome_cliente}}).
+ */
+export type Variables = Record<string, string>;
+
+/**
+ * Props para o componente principal ContractEditor.
+ */
+export interface ContractEditorProps {
+  documents: DocumentData[];
+  variables: Variables;
+  availableClauses: Clause[];
+  onSave: (docId: string, newName: string, newHtmlContent: string) => Promise<boolean>;
+  onAttachTerm: (clause: Clause) => Promise<void>;
+}
+
+export type SaveStatus = 'saved' | 'saving' | 'unsaved' | 'error';
+
+export type PanelTab = 'variables' | 'clauses' | 'history';
+
+export type TabBarProps = {
+  documents: DocumentData[]; // Alterado de ContractEditorProps['documents']
+  activeTabId: string | null; // Permite nulo
+  onSelectTab: (id: string) => void;
+};
+
+export type EditorHeaderProps = {
+  documentName: string;
+  onNameChange: (name: string) => void;
+  saveStatus: SaveStatus;
+  onSave: () => void;
+  onExportPdf: () => void;
+  onShowSettings: () => void;
+  isSettingsOpen: boolean;
+  isSaveDisabled: boolean;
+};
